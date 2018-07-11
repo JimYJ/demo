@@ -124,7 +124,7 @@ func GetConfig() {
 
 // InitMysql 初始化mysql参数
 func InitMysql() {
-	mysql.Init(dbhost, port, dbname, user, pass, "utf8", 1000, 1000)
+	mysql.Init(dbhost, port, dbname, user, pass, "utf8mb4", 1000, 1000)
 }
 
 // GetMysqlConn 获取mysql连接
