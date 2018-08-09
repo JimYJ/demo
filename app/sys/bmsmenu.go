@@ -1,18 +1,18 @@
 package sys
 
 import (
-	"bms/app/respond"
-	"bms/common"
-	"bms/db/system"
+	"666sites/app/respond"
+	"666sites/common"
+	"666sites/db/system"
+	"666sites/service/log"
 	"github.com/gin-gonic/gin"
-	"log"
 	"strconv"
 	"time"
 )
 
 // Menu 菜单管理
 func Menu(c *gin.Context) {
-	mainlist, _ := system.GetMainMenu("0")
+	mainlist, _ := system.GetMainMenu(0)
 	id := c.DefaultQuery("id", "0")
 	title, content := common.GetAlertMsg(c.Query("t"), c.Query("c"))
 	// log.Println(id)
@@ -96,8 +96,12 @@ func handelMenu(c *gin.Context, isEdit bool) {
 
 // ChangeMenuSort 改变菜单排序
 func ChangeMenuSort(c *gin.Context) {
-	id := c.Query("id")
-	parentid := c.Query("parentid")
+	parentid, err := strconv.ParseInt(c.Query("parentid"), 10, 64)
+	id, err2 := strconv.ParseInt(c.Query("id"), 10, 64)
+	if err != nil || err2 != nil {
+		respond.RediErr("menu", common.AlertError, common.AlertParamsError, c)
+		return
+	}
 	updown := c.Query("updown")
 	var u bool
 	if updown == "up" {

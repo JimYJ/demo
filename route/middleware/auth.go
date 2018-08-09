@@ -1,11 +1,11 @@
 package middleware
 
 import (
-	"bms/app/respond"
-	"bms/common"
+	"666sites/app/respond"
+	"666sites/common"
+	"666sites/service/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"log"
 	"time"
 )
 

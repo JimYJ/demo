@@ -1,8 +1,8 @@
 package app
 
 import (
-	"bms/common"
-	"bms/db/system"
+	"666sites/common"
+	"666sites/db/system"
 	"github.com/gin-gonic/gin"
 )
 

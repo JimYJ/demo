@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-{{template "head"}}
+{{template "head" .}}
 <!-- end::Body -->
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
     <!-- begin:: Page -->
     <div class="m-grid m-grid--hor m-grid--root m-page">
-        {{template "header"}}
+        {{template "header" .}}
         <!-- begin::Body -->
         <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
             {{template "leftmenu" .}}
@@ -197,12 +197,12 @@
                                             {{$v.name}}
                                         </td>
                                         <td>
-                                            {{if ne $v.parentid "0"}}
+                                            {{if ne $v.parentid 0}}
                                             <a href="/bms/menu?id=0">
                                             回到上级菜单
                                             </a>
                                             {{else}}
-                                                {{if ne $v.subcount "0"}}
+                                                {{if ne $v.subcount 0}}
                                                 <a href="/bms/menu?id={{$v.id}}">
                                                     查看子菜单
                                                 </a>
@@ -232,12 +232,12 @@
                                             </button>
                                         </td>
                                         <td>
-                                            <a href="/bms/menusort?id={{$v.id}}&parentid={{$v.parentid}}&updown=up">
+                                            <a href="/bms/menu/sort?id={{$v.id}}&parentid={{$v.parentid}}&updown=up">
                                                 <button type="button" id="delbtn" class="btn btn-metal">
                                                     <i class="la la-angle-up"></i>
                                                 </button>
                                             </a>
-                                            <a href="/bms/menusort?id={{$v.id}}&parentid={{$v.parentid}}&updown=down">
+                                            <a href="/bms/menu/sort?id={{$v.id}}&parentid={{$v.parentid}}&updown=down">
                                                 <button type="button" id="delbtn" class="btn btn-metal">
                                                     <i class="la la-angle-down"></i>
                                                 </button>
@@ -257,7 +257,7 @@
         {{template "footer"}} {{template "modalBase"}} {{template "modalHandelMenu" .}}
     </div>
     <!-- end:: Page -->
-    {{template "quicksidebar"}}
+    {{template "quicksidebar" .}}
     <!-- begin::Scroll Top -->
     <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
         <i class="la la-arrow-up"></i>
@@ -265,13 +265,13 @@
     <!-- end::Scroll Top -->
     {{template "quicknav"}}
     <!--begin::Base Scripts -->
-    <script src="assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-    <script src="assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
     <!--end::Base Scripts -->
     <!--begin::Page Resources -->
-    <script src="assets/app/js/sys/menu.js" type="text/javascript"></script>
-    <script src="assets/app/js/store.min.js" type="text/javascript"></script>
-    <script src="assets/app/js/common.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/sys/menu.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/store.min.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/common.js" type="text/javascript"></script>
     <!--end::Page Resources -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -282,11 +282,11 @@
             deleteinfo = function (id, name) {
                 $("#ModalTitle").text("删除记录")
                 $("#modalContent").text("你确定要删除 菜单 - " + name + " 吗?")
-                $("#deleteit").attr("href", "{{.bmspath}}/delmenu?id=" + id)
+                $("#deleteit").attr("href", "{{.bmspath}}/menu/del?id=" + id)
             }
             edit = function (id, name, path,icon, parentid) {
                 $("#ModalAddMenuTitle").text("编辑记录")
-                $("#handelAction").attr("action", "{{.bmspath}}/editmenu?id=" + id)
+                $("#handelAction").attr("action", "{{.bmspath}}/menu/edit?id=" + id)
                 $("#path").attr("value", path)
                 $("#names").attr("value", name)
                 $("#icon").attr("value", icon)
@@ -296,7 +296,7 @@
             }
             add = function () {
                 $("#ModalAddMenuTitle").text("新增记录")
-                $("#handelAction").attr("action", "{{.bmspath}}/addmenu")
+                $("#handelAction").attr("action", "{{.bmspath}}/menu/add")
                 $("#path").attr("value", "")
                 $("#names").attr("value", "")
                 $("#icon").attr("value", "")

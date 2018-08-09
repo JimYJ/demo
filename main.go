@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bms/common"
-	"bms/route"
-	"log"
+	"666sites/common"
+	"666sites/route"
+	// "log"
 )
 
 func main() {
@@ -11,8 +11,9 @@ func main() {
 }
 
 func inits() {
-	log.SetFlags(log.Lshortfile | log.LstdFlags)
+	// log.SetFlags(log.Lshortfile | log.LstdFlags)
 	common.GetConfig()
 	common.InitMysql()
+	common.GetMysqlConn()
 	route.Web()
 }

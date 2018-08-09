@@ -1,11 +1,11 @@
 package auth
 
 import (
-	"bms/app/respond"
-	"bms/common"
-	"bms/db/system"
+	"666sites/app/respond"
+	"666sites/common"
+	"666sites/db/system"
+	"666sites/service/log"
 	"github.com/gin-gonic/gin"
-	"log"
 	"regexp"
 	"strconv"
 	"time"
@@ -38,10 +38,10 @@ func Login(c *gin.Context) {
 	t := time.Now().UnixNano()
 	timestamp := strconv.FormatInt(t, 10)
 	ip := []byte(c.ClientIP())
-	uid := []byte(id)
+	uid := []byte(strconv.FormatInt(id.(int64), 10))
 	token := common.CreateToken(ip, uid, []byte(timestamp))
 	cache := common.GetCache()
-	tokeninfo := common.GetTokenCache(id, timestamp, user)
+	tokeninfo := common.GetTokenCache(string(uid), timestamp, user)
 	cache.Set(token, tokeninfo, common.TokenTimeOut)
 	common.SingleLogin(token)
 	common.SetCookie(c, "c", token)

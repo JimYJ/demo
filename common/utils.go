@@ -1,6 +1,7 @@
 package common
 
 import (
+	"666sites/service/log"
 	"crypto/hmac"
 	"crypto/sha1"
 	"crypto/sha256"
@@ -10,7 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
 	"io"
-	"log"
 	"net/http"
 	"regexp"
 )

@@ -1,11 +1,11 @@
 package sys
 
 import (
-	"bms/app/respond"
-	"bms/common"
-	"bms/db/system"
+	"666sites/app/respond"
+	"666sites/common"
+	"666sites/db/system"
+	"666sites/service/log"
 	"github.com/gin-gonic/gin"
-	"log"
 	"strconv"
 	"time"
 )

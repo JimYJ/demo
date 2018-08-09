@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/JimYJ/easysql/mysql"
+	"github.com/JimYJ/easysql/mysql/v2"
 	"github.com/patrickmn/go-cache"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"

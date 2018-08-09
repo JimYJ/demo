@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-{{template "head"}}
+{{template "head" .}}
 <!-- end::Body -->
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
     <!-- begin:: Page -->
     <div class="m-grid m-grid--hor m-grid--root m-page">
-        {{template "header"}}
+        {{template "header" .}}
         <!-- begin::Body -->
         <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
             {{template "leftmenu" .}}
@@ -129,7 +129,7 @@
         {{template "footer"}} {{template "modalBase"}} {{template "modalHandelRole"}} {{template "modalRoleMenu" .}}
     </div>
     <!-- end:: Page -->
-    {{template "quicksidebar"}}
+    {{template "quicksidebar" .}}
     <!-- begin::Scroll Top -->
     <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
         <i class="la la-arrow-up"></i>
@@ -137,13 +137,13 @@
     <!-- end::Scroll Top -->
     {{template "quicknav"}}
     <!--begin::Base Scripts -->
-    <script src="assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
-    <script src="assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
     <!--end::Base Scripts -->
     <!--begin::Page Resources -->
-    <script src="assets/app/js/sys/menu.js" type="text/javascript"></script>
-    <script src="assets/app/js/store.min.js" type="text/javascript"></script>
-    <script src="assets/app/js/common.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/sys/menu.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/store.min.js" type="text/javascript"></script>
+    <script src="{{.bmspath}}/assets/app/js/common.js" type="text/javascript"></script>
     <!--end::Page Resources -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -154,23 +154,23 @@
             deleteinfo = function (id, name) {
                 $("#ModalTitle").text("删除记录")
                 $("#modalContent").text("你确定要删除 角色 - " + name + " 吗?")
-                $("#deleteit").attr("href", "{{.bmspath}}/delrole?id=" + id)
+                $("#deleteit").attr("href", "{{.bmspath}}/role/del?id=" + id)
             }
             edit = function (id, name) {
                 $("#ModalAddMenuTitle").text("编辑记录")
-                $("#handelAction").attr("action", "{{.bmspath}}/editrole?id=" + id)
+                $("#handelAction").attr("action", "{{.bmspath}}/role/edit?id=" + id)
                 $("#names").attr("value", name)
             }
             add = function () {
                 $("#ModalAddMenuTitle").text("新增记录")
-                $("#handelAction").attr("action", "{{.bmspath}}/addrole")
+                $("#handelAction").attr("action", "{{.bmspath}}/role/add")
                 $("#names").attr("value", "")
                 $("#parentid").val("0");
             }
             rolemenu = function (id) {
-                $("#roleAction").attr("action", "{{.bmspath}}/rolebindmenu?id=" + id)
+                $("#roleAction").attr("action", "{{.bmspath}}/role/bindmenu?id=" + id)
                 $.ajax({
-                    url: "{{.bmspath}}/rolemenulist?id=" + id,
+                    url: "{{.bmspath}}/role/menulist?id=" + id,
                     success: function (rs) {
                         var obj = $("#menuSelect").select2({
                             placeholder: "选择可访问菜单",
